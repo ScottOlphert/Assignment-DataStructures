@@ -1,0 +1,138 @@
+package priorityList;
+
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+
+public class MenuBar extends JFrame implements ActionListener{
+	
+	private Container main;
+	private JMenuBar jmb;
+	private JMenu appMenu,allocatMenu,systemMenu;
+	private JMenuItem addApp,removeApp,updateApp,dAll,allocate,report, eSystem;
+	private ImageIcon icon = new ImageIcon("Resource/GolfClub.png");
+	private JLabel logo;
+	private Display display;
+	private AddRequest add;
+	Font sml = new Font("Arial", Font.BOLD,18);
+	Font lrg = new Font("Arial", Font.BOLD,20);
+	
+	public MenuBar()
+	{
+		main = getContentPane();
+		main.setBackground(Color.white);
+		
+		jmb = new JMenuBar();
+		jmb.setBackground(Color.decode("#009900"));
+		
+		appMenu = new JMenu("Applications");
+		appMenu.setFont(lrg);
+		appMenu.setBackground(Color.decode("#009900"));
+		appMenu.setForeground(Color.white);
+		
+		allocatMenu = new JMenu("Allocation");
+		allocatMenu.setFont(lrg);
+		allocatMenu.setBackground(Color.decode("#009900"));
+		allocatMenu.setForeground(Color.white);
+		
+		systemMenu = new JMenu("Exit");
+		systemMenu.setFont(lrg);
+		systemMenu.setBackground(Color.decode("#009900"));
+		systemMenu.setForeground(Color.white);
+		
+		addApp = new JMenuItem("Add Request");
+		addApp.setFont(sml);
+		addApp.setBackground(Color.decode("#4C9900"));
+		addApp.setForeground(Color.white);
+		addApp.addActionListener(this);
+		appMenu.add(addApp);
+
+		removeApp = new JMenuItem("Remove Request");
+		removeApp.setFont(sml);
+		removeApp.setBackground(Color.decode("#4C9900"));
+		removeApp.setForeground(Color.white);
+		removeApp.addActionListener(this);
+		appMenu.add(removeApp);
+		
+		updateApp = new JMenuItem("Update Request");
+		updateApp.setFont(sml);
+		updateApp.setBackground(Color.decode("#4C9900"));
+		updateApp.setForeground(Color.white);
+		updateApp.addActionListener(this);
+		appMenu.add(updateApp);
+		
+		dAll = new JMenuItem("Display All Request");
+		dAll.setFont(sml);
+		dAll.setBackground(Color.decode("#4C9900"));
+		dAll.setForeground(Color.white);
+		dAll.addActionListener(this);
+		appMenu.add(dAll);
+				
+		allocate = new JMenuItem("Allocate Tickets");
+		allocate.setFont(sml);
+		allocate.setBackground(Color.decode("#4C9900"));
+		allocate.setForeground(Color.white);
+		allocate.addActionListener(this);
+		allocatMenu.add(allocate);
+		
+		report = new JMenuItem("Confirmed List - Report");
+		report.setFont(sml);
+		report.setBackground(Color.decode("#4C9900"));
+		report.setForeground(Color.white);
+		report.addActionListener(this);
+		allocatMenu.add(report);
+		
+		eSystem = new JMenuItem("Exit System");
+		eSystem.setFont(sml);
+		eSystem.setBackground(Color.decode("#4C9900"));
+		eSystem.setForeground(Color.white);
+		eSystem.addActionListener(this);
+		systemMenu.add(eSystem);
+		
+		jmb.add(appMenu);
+		jmb.add(allocatMenu);
+		jmb.add(systemMenu);
+		
+		setJMenuBar(jmb);
+		
+		logo = new JLabel(icon);
+		
+		main.add(logo);
+		
+		display = new Display(); // Priority list
+		display.setTitle("Priority List");
+		display.setSize(600,600);
+		display.setLocation(150,150);
+		
+		add = new AddRequest();
+		add.setTitle("Priority List");
+		add.setSize(600,600);
+		add.setLocation(150,150);
+	}
+
+	
+	public void actionPerformed(ActionEvent e) {
+		
+		if ( e.getSource() == dAll)
+		{
+			display.setVisible(true);
+		}
+		
+		if(e.getSource() == addApp)
+		{
+			add.setVisible(true);
+		}
+		
+		
+	}
+
+}

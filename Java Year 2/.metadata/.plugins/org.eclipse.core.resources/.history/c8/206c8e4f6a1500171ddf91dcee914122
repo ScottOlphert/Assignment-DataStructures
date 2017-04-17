@@ -1,0 +1,23 @@
+package pizzaQueue;
+
+import java.util.Date;
+
+public class PizzaOrder 
+{
+	private int orderNo, count = 10000;
+	private String pSize, pBase, pTop;
+	private Date dateTime;
+	private Double price;
+	
+	public PizzaOrder() {
+		count++;
+		this.orderNo = count;
+		this.pSize = pSize;
+		this.pBase = pBase;
+		this.pTop = pTop;
+		this.dateTime = dateTime;
+		this.price = price;
+	}
+	
+
+}

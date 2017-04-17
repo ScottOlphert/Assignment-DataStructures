@@ -1,0 +1,20 @@
+package pizzaQueue;
+
+import javax.swing.JFrame;
+
+import test.Test;
+
+public class Main {
+	
+	public static void main(String[] args) 
+	{    
+       
+		OrderForm frm = new OrderForm();     
+		frm.setSize(500, 500);
+		frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //JPanel panel = new JPanel(); 
+        //Frame.add(AddBooking);
+        frm.setVisible(true);
+    }
+
+}

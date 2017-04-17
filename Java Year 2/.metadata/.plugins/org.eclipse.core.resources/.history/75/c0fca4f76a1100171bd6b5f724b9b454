@@ -1,0 +1,403 @@
+package test;
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Enumeration;
+
+import javax.swing.*;
+
+
+public class Test extends JFrame implements ActionListener
+{
+	// Declare components
+	private JComboBox cmbSize;
+	private JTextField txtDate, txtTime, txtContact ;
+	private JLabel lblheading, lblPreview, lblSize, lblSize2, lblBase, lblTopping, lblPrice;
+	private JButton btnAdd, btnReset, btnExit ;
+	private JRadioButton thin, Deep;
+	private ButtonGroup Crust;
+	private JCheckBox Bacon, Chicken, Pepperoni, Pineapple, Mushrooms, Olives;
+	private Container Main; 
+	private JPanel Order, pSize, Banner;
+	private Box CrustType, TopBox, box1, box2;
+	private int NoTop = 0;
+	private double Sum = 0;
+
+
+	Font all = new Font("Calibri", Font.BOLD,14); // Create a font to use as default
+
+	// Method used to add component to the container and declare constraints
+	private void addComp(Container Con, Component c, int x, int y, int width, int height, int Weightx, int weighty)
+	{
+		// Create instance of constraints
+		GridBagConstraints gc = new GridBagConstraints();
+		//set constraints
+		gc.fill = GridBagConstraints.BOTH;
+		gc.anchor = GridBagConstraints.CENTER;
+		gc.insets = new Insets(5,5,5,5);// sets the space between components 
+		gc.gridx = x;
+		gc.gridy = y;
+		gc.gridwidth = width;
+		gc.gridheight = height;
+		gc.weightx = Weightx;
+		gc.weighty = weighty;
+
+		// set the font using the default created above
+		c.setFont(all); 
+
+		//add the component to the container
+		Con.add(c, gc);
+
+	} 
+
+	public Test() 
+	{
+		Main = getContentPane ();
+		Main.setLayout(new GridBagLayout());
+		Order = new JPanel();
+		Order.setLayout(new GridBagLayout());
+		Order.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		pSize= new JPanel();
+		pSize.setLayout(new GridBagLayout());
+
+		Chicken = new JCheckBox("Chicken");
+		Chicken.addActionListener(this);
+		Pepperoni = new JCheckBox("Pepperoni");
+		Pepperoni.addActionListener(this);
+		Pineapple = new JCheckBox("Pineapple");
+		Pineapple.addActionListener(this);
+		Mushrooms = new JCheckBox("Mushrooms");
+		Mushrooms.addActionListener(this);
+		Olives = new JCheckBox("Olives");
+		Olives.addActionListener(this);
+		Bacon = new JCheckBox("Bacon");
+		Bacon.addActionListener(this);
+
+		TopBox = Box.createHorizontalBox();
+		box1 = Box.createVerticalBox();
+		box2 = Box.createVerticalBox();
+		box1.add(Chicken);
+		box1.add(Bacon);
+		box1.add(Pepperoni);
+		box2.add(Pineapple);
+		box2.add(Mushrooms);
+		box2.add(Olives);
+		TopBox.add(box1);
+		TopBox.add(box2);
+		TopBox.setBorder(BorderFactory.createTitledBorder("Toppings"));
+
+		// Create the labels
+		lblheading = new JLabel("Pizza Orders",JLabel.CENTER);
+		//lblheading.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		lblPreview = new JLabel("<html><u>--Order Preview--</u></html>",JLabel.CENTER);
+		//lblPreview.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		lblSize = new JLabel("Size ",JLabel.LEFT); 
+		//	lblSize.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		lblSize2 = new JLabel("Size: ",JLabel.LEFT); 
+		//lblSize2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		lblBase = new JLabel("Base: ",JLabel.LEFT);
+		//lblBase.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		lblTopping = new JLabel("Toppings: "+ NoTop,JLabel.LEFT);
+		lblPrice = new JLabel("Price: £" +Sum,JLabel.LEFT);
+		//lblTopping.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+		//lblPreview.setFont(new Font("Calibri", Font.ITALIC,12));
+
+		// array to hold the combo box options
+		String [] Size = {"---Select---","Small", "Medium", "Large", "Extra Large"};
+
+		// create combo box
+		cmbSize = new JComboBox(Size); 
+		cmbSize.addActionListener(this);
+		/*
+		Order.add(lblSize2);
+		Order.add(lblBlank1);
+		Order.add(lblBase);
+		Order.add(lblBlank2);
+		Order.add(lblTopping);
+		Order.add(lblBlank3);
+		Order.add(lblBlank4);
+		 */
+		thin = new JRadioButton("Thin Crust");
+		thin.addActionListener(this);
+
+		Deep = new JRadioButton("Deep Pan");
+		Deep.addActionListener(this);
+
+
+		Crust = new ButtonGroup();
+		Crust.add(thin);
+		Crust.add(Deep);
+
+
+		CrustType = Box.createVerticalBox();
+		CrustType.add(thin);
+		CrustType.add(Deep);
+		CrustType.setBorder(BorderFactory.createTitledBorder("Crust"));
+
+		// x pos, y pos, width, height, weightx, weighty
+
+		addComp(Main,lblheading,0,0,4,1,1,0);
+		addComp(Main,pSize,0,1,3,1,0,0);
+		addComp(Main,Order,3,1,1,2,0,0);
+		addComp(Main,CrustType,0,2,1,1,0,0);
+		addComp(Main,TopBox,1,2,2,1,0,0);
+
+		addComp(Order,lblPreview,0,0,1,1,1,1);
+		addComp(Order,lblSize2,0,1,1,1,1,1);
+		addComp(Order,lblBase,0,2,1,1,1,1);
+		addComp(Order,lblTopping,0,3,1,1,1,1);
+		addComp(Order,lblPrice,0,4,1,1,1,1);
+
+		addComp(pSize,lblSize,0,0,1,1,0,0);
+		addComp(pSize,cmbSize,1,0,2,1,1,0);
+	}
+
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{		
+		// Collect Dropdown Box seletion
+		if(e.getSource()== cmbSize)
+		{
+			if(cmbSize.getSelectedItem().toString()=="---Select---")
+			{
+				lblSize2.setText("Size:               ");
+			}
+			else
+				lblSize2.setText("Size: " + cmbSize.getSelectedItem().toString());
+		}
+
+		// Collect Radio Button Selection
+		if(e.getSource()== thin)
+		{
+			lblBase.setText ("Base: " + thin.getText().toString());
+		}
+
+		if(e.getSource()== Deep)
+		{
+			lblBase.setText ("Base: " + Deep.getText().toString());
+		}
+
+		if(e.getSource() == Bacon)
+		{
+			if(Bacon.isSelected())
+			{
+				NoTop ++;
+				Sum += 0.5;
+				lblTopping.setText("Toppings: "+ NoTop);
+				lblPrice.setText("Price: £" +Sum);
+			}
+			else
+			{
+				NoTop --;
+				Sum -= 0.5;
+				lblTopping.setText("Toppings: "+ NoTop);
+				lblPrice.setText("Price: £" +Sum);
+			}
+		}
+		
+		if(e.getSource() == Chicken)
+		{
+			if(Chicken.isSelected())
+			{
+				NoTop ++;
+				Sum += 0.5;
+				lblTopping.setText("Toppings: "+ NoTop);
+				lblPrice.setText("Price: £" +Sum);
+			}
+			else
+			{
+				NoTop --;
+				Sum -= 0.5;
+				lblTopping.setText("Toppings: "+ NoTop);
+				lblPrice.setText("Price: £" +Sum);
+			}
+		}
+		
+		if(e.getSource() == Pepperoni)
+		{
+			if(Pepperoni.isSelected())
+			{
+				NoTop ++;
+				Sum += 0.5;
+				lblTopping.setText("Toppings: "+ NoTop);
+				lblPrice.setText("Price: £" +Sum);
+			}
+			else
+			{
+				NoTop --;
+				Sum -= 0.5;
+				lblTopping.setText("Toppings: "+ NoTop);
+				lblPrice.setText("Price: £" +Sum);
+			}
+		}
+		
+		if(e.getSource() == Pineapple)
+		{
+			if(Pineapple.isSelected())
+			{
+				NoTop ++;
+				Sum += 0.5;
+				lblTopping.setText("Toppings: "+ NoTop);
+				lblPrice.setText("Price: £" +Sum);
+			}
+			else
+			{
+				NoTop --;
+				Sum -= 0.5;
+				lblTopping.setText("Toppings: "+ NoTop);
+				lblPrice.setText("Price: £" +Sum);
+			}
+		}
+		
+		if(e.getSource() == Mushrooms)
+		{
+			if(Mushrooms.isSelected())
+			{
+				NoTop ++;
+				Sum += 0.5;
+				lblTopping.setText("Toppings: "+ NoTop);
+				lblPrice.setText("Price: £" +Sum);
+			}
+			else
+			{
+				NoTop --;
+				Sum -= 0.5;
+				lblTopping.setText("Toppings: "+ NoTop);
+				lblPrice.setText("Price: £" +Sum);
+			}
+		}
+		
+		if(e.getSource() == Olives)
+		{
+			if(Olives.isSelected())
+			{
+				NoTop ++;
+				Sum += 0.5;
+				lblTopping.setText("Toppings: "+ NoTop);
+				lblPrice.setText("Price: £" +Sum);
+			}
+			else
+			{
+				NoTop --;
+				Sum -= 0.5;
+				lblTopping.setText("Toppings: "+ NoTop);
+				lblPrice.setText("Price: £" +Sum);
+			}
+		}
+		// Collect CheckBox Selection
+		//Bacon, Chicken, Pepperoni, Pineapple, Mushrooms, Olives;
+		/*JCheckBox Check = (JCheckBox) e.getSource();
+		if(Check.isSelected())
+		{
+			if(Check == Bacon)
+			{
+				NoTop ++;
+				Sum += 0.5;
+				lblTopping.setText("Toppings: "+ NoTop);
+				lblPrice.setText("Price: £" +Sum);
+			}
+			else if(Check == Chicken)
+			{
+				NoTop ++;
+				Sum += 0.5;
+				lblTopping.setText("Toppings: "+ NoTop);
+				lblPrice.setText("Price: £" +Sum);
+			}
+			else if(Check == Pepperoni)
+			{
+				NoTop ++;
+				Sum += 0.5;
+				lblTopping.setText("Toppings: "+ NoTop);
+				lblPrice.setText("Price: £" +Sum);
+			}
+			else if(Check == Pineapple)
+			{
+				NoTop ++;
+				Sum += 0.5;
+				lblTopping.setText("Toppings: "+ NoTop);
+				lblPrice.setText("Price: £" +Sum);
+			}
+			else if(Check == Mushrooms)
+			{
+				NoTop ++;
+				Sum += 0.5;
+				lblTopping.setText("Toppings: "+ NoTop);
+				lblPrice.setText("Price: £" +Sum);
+			}
+			else if(Check == Olives)
+			{
+				NoTop ++;
+				Sum += 0.5;
+				lblTopping.setText("Toppings: "+ NoTop);
+				lblPrice.setText("Price: £" +Sum);
+			}
+		}
+		else
+			if(Check == Bacon)
+			{
+				NoTop --;
+				Sum -= 0.5;
+				lblTopping.setText("Toppings: "+ NoTop);
+				lblPrice.setText("Price: £" +Sum);
+			}
+			else if(Check == Chicken)
+			{
+				NoTop --;
+				Sum -= 0.5;
+				lblTopping.setText("Toppings: "+ NoTop);
+				lblPrice.setText("Price: £" +Sum);
+			}
+			else if(Check == Pepperoni)
+			{
+				NoTop --;
+				Sum -= 0.5;
+				lblTopping.setText("Toppings: "+ NoTop);
+				lblPrice.setText("Price: £" +Sum);
+			}
+			else if(Check == Pineapple)
+			{
+				NoTop --;
+				Sum -= 0.5;
+				lblTopping.setText("Toppings: "+ NoTop);
+				lblPrice.setText("Price: £" +Sum);
+			}
+			else if(Check == Mushrooms)
+			{
+				NoTop --;
+				Sum -= 0.5;
+				lblTopping.setText("Toppings: "+ NoTop);
+				lblPrice.setText("Price: £" +Sum);
+			}
+			else if(Check == Olives)
+			{
+				NoTop --;
+				Sum -= 0.5;
+				lblTopping.setText("Toppings: "+ NoTop);
+				lblPrice.setText("Price: £" +Sum);
+			}*/
+
+	}
+
+
+	public static void main(String[] args) 
+	{    
+
+		Test frm = new Test();     
+		frm.setSize(500, 500);
+		frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//JPanel panel = new JPanel(); 
+		//Frame.add(AddBooking);
+		frm.setVisible(true);
+	}
+}

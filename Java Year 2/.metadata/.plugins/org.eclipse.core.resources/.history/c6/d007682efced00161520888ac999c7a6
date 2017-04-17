@@ -1,0 +1,50 @@
+package sortArrays;
+import java. util. Scanner;
+
+public class BubbleSort 
+{
+	
+	public static void main(String[] args) 
+	{
+		Scanner scan = new Scanner(System.in);
+		
+		int [] age = new int [10]; 
+		int temp;
+		boolean change = false;
+		
+		for(int x=0; x<9; x++)
+		{
+			System.out.print("Please enter age number " + (x+1) + ": ");
+			age [x] = scan.nextInt();
+		}
+		
+		do
+		{
+			change = false;
+			for(int y = 0; y<8; y++)
+			{
+				if(age[y]>age[y+1])
+				{
+					change = true;
+					temp = age[y];
+					age[y] = age[y+1];
+					age[y+1] = temp;
+				}
+			}
+				
+				
+			
+		}
+		while (change = true);
+		
+		
+			
+		for (int x=0; x<9; x++)
+		{
+			System.out.print(age[x] + "\n");
+		}
+		
+		
+	}
+
+}

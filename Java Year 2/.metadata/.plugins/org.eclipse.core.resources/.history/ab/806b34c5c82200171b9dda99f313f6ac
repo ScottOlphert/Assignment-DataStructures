@@ -1,0 +1,125 @@
+package priorityList;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+
+public class AddRequest extends JFrame implements ActionListener {
+
+	private Container cn; 
+	private JLabel lblTitle,lblName,lblEmail,memDate,lblDay,lblMonth,lblYear,lblTelNo,
+	buf,buf1,buf2,buf3,buf4,buf5;
+	private JPanel p1, p2, p3, p4, p5;
+	private JTextField name, email, telNo;
+	private JComboBox<?> day,month,year, ticketNo; 
+	private GB c;
+
+
+	public AddRequest()
+	{
+		cn = getContentPane();
+		cn.setLayout(new GridBagLayout());
+		cn.setBackground(Color.decode("#4C9900"));
+		cn.setForeground(Color.WHITE);
+
+		p1 = new JPanel(new GridBagLayout());
+		p1.setBackground(Color.decode("#4C9900"));
+		p2 = new JPanel(new GridBagLayout());
+		p2.setBackground(Color.decode("#4C9900"));
+		p3 = new JPanel(new GridBagLayout());
+		p3.setBackground(Color.decode("#4C9900"));
+		p4 = new JPanel(new GridBagLayout());
+		p4.setBackground(Color.decode("#4C9900"));
+		p5 = new JPanel(new GridBagLayout());
+		p5.setBackground(Color.decode("#4C9900"));
+
+		lblTitle = new JLabel("<html><u>--Priority List--</u></html>",JLabel.CENTER);
+		lblTitle.setForeground(Color.white);
+		lblName = new JLabel("Name:",JLabel.RIGHT);
+		lblName.setForeground(Color.WHITE);
+		lblEmail = new JLabel("Email:", JLabel.RIGHT);
+		lblEmail.setForeground(Color.WHITE);
+		lblTelNo = new JLabel("Phone:", JLabel.RIGHT);
+		lblTelNo.setForeground(Color.WHITE);
+		
+		buf = new JLabel("FILL");
+		buf1 = new JLabel("FILL1");
+		buf2 = new JLabel("FILL2");
+		buf3 = new JLabel("FILL3");
+		buf4 = new JLabel("FILL4");
+		buf5 = new JLabel("FILL5");
+		
+		buf.setBackground(Color.white);
+		buf1.setBackground(Color.white);
+		buf2.setBackground(Color.white);
+		buf3.setBackground(Color.white);
+		buf4.setBackground(Color.white);
+		buf5.setBackground(Color.white);
+		p1.setBackground(Color.blue);
+		p2.setBackground(Color.red);
+		p3.setBackground(Color.pink);
+		p4.setBackground(Color.decode("#4C9900"));
+		p5.setBackground(Color.decode("#4C9900"));
+		
+		name = new JTextField();
+		email = new JTextField();
+		telNo = new JTextField();
+		
+		
+
+		addComp(p1,lblTitle,1,0,1,1,0,0);
+		addComp(p1,buf,0,0,1,1,1,0);
+		addComp(p1,buf1,2,0,1,1,1,0);
+		
+		addComp(p2,buf2,0,0,0,1,1,0);
+		addComp(p2,lblName,1,0,1,1,0,0);
+		addComp(p2,name,2,0,2,1,1,0);
+		addComp(p2,lblEmail,1,1,1,1,0,0);
+		addComp(p2,email,2,1,2,1,1,0);
+		addComp(p2,lblTelNo,1,2,1,1,0,0);
+		addComp(p2,telNo,2,2,2,1,1,0);
+		addComp(p2,buf3,4,0,0,1,1,0);
+		
+		
+		addComp(cn,p1,0,0,1,1,1,0);
+		addComp(cn,p2,0,1,1,1,1,1);
+		addComp(cn,p3,0,2,1,1,1,1);
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	// Method used to add component to the container and declare constraints
+	private void addComp(Container Con, Component c, int x, int y, int width, int height, int Weightx, int weighty)
+	{
+		Font all = new Font("Consolas", Font.BOLD,18); // Create a font to use as default
+
+		// Create instance of constraints
+		GridBagConstraints gc = new GridBagConstraints();
+
+		//set constraints
+		gc.fill = GridBagConstraints.BOTH;
+		gc.anchor = GridBagConstraints.CENTER;
+		gc.insets = new Insets(5,5,5,5);// sets the space between components 
+		gc.gridx = x;
+		gc.gridy = y;
+		gc.gridwidth = width;
+		gc.gridheight = height;
+		gc.weightx = Weightx;
+		gc.weighty = weighty;
+
+		// set the font using the default created above
+		c.setFont(all); 
+
+		//add the component to the container
+		Con.add(c, gc);
+
+	} 
+
+}

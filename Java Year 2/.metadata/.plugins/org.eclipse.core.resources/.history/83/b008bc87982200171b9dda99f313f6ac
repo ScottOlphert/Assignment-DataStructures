@@ -1,0 +1,6 @@
+package priorityList;
+
+public class AddRequest {
+
+	private Container cn;
+}
