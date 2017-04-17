@@ -141,7 +141,7 @@ public class MenuBar extends JFrame implements ActionListener{
 		
 		if(e.getSource() == updateApp)
 		{
-			update.setVisible(true);
+			add.setVisible(true);
 		}
 		
 	}

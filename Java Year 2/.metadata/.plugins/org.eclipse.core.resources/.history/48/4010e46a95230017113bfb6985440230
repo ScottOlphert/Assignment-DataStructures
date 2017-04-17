@@ -23,8 +23,6 @@ public class MenuBar extends JFrame implements ActionListener{
 	private JLabel logo;
 	private Display display;
 	private AddRequest add;
-	private UpdateReq update;
-	
 	Font sml = new Font("Arial", Font.BOLD,16);
 	Font lrg = new Font("Arial", Font.BOLD,18);
 	
@@ -116,14 +114,9 @@ public class MenuBar extends JFrame implements ActionListener{
 		display.setLocation(150,100);
 		
 		add = new AddRequest();
-		add.setTitle("Submit Application");
+		add.setTitle("Priority List");
 		add.setSize(600,600);
 		add.setLocation(150,100);
-		
-		update= new UpdateReq();
-		update.setTitle("Update Application");
-		update.setSize(600,600);
-		update.setLocation(150,100); 
 	}
 
 	
@@ -139,10 +132,6 @@ public class MenuBar extends JFrame implements ActionListener{
 			add.setVisible(true);
 		}
 		
-		if(e.getSource() == updateApp)
-		{
-			update.setVisible(true);
-		}
 		
 	}
 

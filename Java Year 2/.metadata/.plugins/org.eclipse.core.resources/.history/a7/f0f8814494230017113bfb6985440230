@@ -50,7 +50,6 @@ public class AddRequest extends JFrame implements ActionListener {
 		buf1 = new JLabel("    ");
 		buf2 = new JLabel("    ");
 		buf3 = new JLabel("    ");
-		buf4 = new JLabel("    ");
 		
 		name = new JTextField();
 		email = new JTextField();
